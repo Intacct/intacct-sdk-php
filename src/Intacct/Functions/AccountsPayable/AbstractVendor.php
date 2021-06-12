@@ -35,6 +35,9 @@ abstract class AbstractVendor extends AbstractFunction
 
     use CustomFieldsTrait;
 
+    /** @var int */
+    protected $recordNo;
+
     /** @var string */
     protected $vendorId;
 
@@ -231,6 +234,26 @@ abstract class AbstractVendor extends AbstractFunction
 
     /** @var array */
     protected $restrictedDepartments = [];
+
+    /**
+     * Get record number
+     *
+     * @return int|string
+     */
+    public function getRecordNo()
+    {
+        return $this->recordNo;
+    }
+
+    /**
+     * Set record number
+     *
+     * @param int|string $recordNo
+     */
+    public function setRecordNo($recordNo)
+    {
+        $this->recordNo = $recordNo;
+    }
 
     /**
      * Get vendor ID
@@ -549,7 +572,7 @@ abstract class AbstractVendor extends AbstractFunction
      */
     public function setPrimaryEmailAddress($primaryEmailAddress)
     {
-        if (filter_var($primaryEmailAddress, FILTER_VALIDATE_EMAIL) === false) {
+        if (!empty($primaryEmailAddress) && filter_var($primaryEmailAddress, FILTER_VALIDATE_EMAIL) === false) {
             throw new \InvalidArgumentException('Primary Email Address is not a valid email');
         }
         $this->primaryEmailAddress = $primaryEmailAddress;

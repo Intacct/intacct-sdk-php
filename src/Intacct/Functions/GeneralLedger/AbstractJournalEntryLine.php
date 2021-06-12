@@ -19,6 +19,11 @@ namespace Intacct\Functions\GeneralLedger;
 
 abstract class AbstractJournalEntryLine extends AbstractGlEntry
 {
+    /** @var string */
+    const TR_TYPE_CREDIT = -1;
+
+    /** @var string */
+    const TR_TYPE_DEBIT = 1;
 
     /** @var string */
     protected $glAccountNumber;
@@ -37,6 +42,9 @@ abstract class AbstractJournalEntryLine extends AbstractGlEntry
 
     /** @var string */
     protected $exchangeRateType;
+
+    /** @var string */
+    protected $transactionType;
 
     /**
      * @return string
@@ -132,5 +140,21 @@ abstract class AbstractJournalEntryLine extends AbstractGlEntry
     public function setExchangeRateType($exchangeRateType)
     {
         $this->exchangeRateType = $exchangeRateType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransactionType()
+    {
+        return $this->transactionType;
+    }
+
+    /**
+     * @param string $transactionType
+     */
+    public function setTransactionType($transactionType)
+    {
+        $this->transactionType = $transactionType;
     }
 }

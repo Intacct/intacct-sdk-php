@@ -36,7 +36,13 @@ class JournalEntryLineCreate extends AbstractJournalEntryLine
 
         $xml->writeElement('DOCUMENT', $this->getDocumentNumber());
         $xml->writeElement('ACCOUNTNO', $this->getGlAccountNumber(), true);
-        if ($this->getTransactionAmount()< 0) {
+
+        // If the amount is 0, we need to explicitly specify whether the entry is Debit or Credit
+        if ($this->getTransactionType()) {
+            $xml->writeElement('TR_TYPE', $this->getTransactionType());
+		    $xml->writeElement('TRX_AMOUNT', abs($this->getTransactionAmount()), true);
+        }
+        else if ($this->getTransactionAmount()< 0) {
             $xml->writeElement('TR_TYPE', '-1'); //Credit
             $xml->writeElement('TRX_AMOUNT', abs($this->getTransactionAmount()), true);
         } else {

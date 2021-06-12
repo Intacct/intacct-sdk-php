@@ -223,7 +223,7 @@ EOF;
     public function testRequiredId(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Customer ID is required for update");
+        $this->expectExceptionMessage("Customer ID or record number is required for update");
 
         $xml = new XMLWriter();
         $xml->openMemory();

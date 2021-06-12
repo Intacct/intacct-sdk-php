@@ -36,6 +36,9 @@ abstract class AbstractCustomer extends AbstractFunction
 
     use CustomFieldsTrait;
 
+    /** @var int */
+    protected $recordNo;
+
     /** @var string */
     protected $customerId;
 
@@ -219,6 +222,26 @@ abstract class AbstractCustomer extends AbstractFunction
 
     /** @var array */
     protected $restrictedDepartments = [];
+
+    /**
+     * Get record number
+     *
+     * @return int|string
+     */
+    public function getRecordNo()
+    {
+        return $this->recordNo;
+    }
+
+    /**
+     * Set record number
+     *
+     * @param int|string $recordNo
+     */
+    public function setRecordNo($recordNo)
+    {
+        $this->recordNo = $recordNo;
+    }
 
     /**
      * Get customer ID

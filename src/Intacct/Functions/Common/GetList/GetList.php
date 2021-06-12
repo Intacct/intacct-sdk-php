@@ -194,6 +194,12 @@ class GetList extends AbstractFunction
         if ($this->getMaxTotalCount() > 0) {
             $xml->writeAttribute('maxitems', $this->getMaxTotalCount());
         }
+
+        // Add the "start" attribute
+		if ($this->getStartAtCount() > 0) {
+            $xml->writeAttribute('start', $this->getStartAtCount());
+        }
+
         $xml->writeAttribute('showprivate', $this->isShowPrivate());
 
         if ($this->getFilter()) {

@@ -26,6 +26,9 @@ class ReadMore extends AbstractFunction
     /** @var string */
     private $resultId = '';
 
+     /** @var string */
+	private $reportId = '';
+
     /**
      * @return string
      */
@@ -43,6 +46,22 @@ class ReadMore extends AbstractFunction
     }
     
     /**
+     * @return string
+     */
+    public function getReportId(): string
+    {
+        return $this->reportId;
+    }
+
+    /**
+     * @param string $reportId
+     */
+    public function setReportId(string $reportId)
+    {
+        $this->reportId = $reportId;
+    }
+
+    /**
      * Write the readMore block XML
      *
      * @param XMLWriter $xml
@@ -54,12 +73,17 @@ class ReadMore extends AbstractFunction
         
         $xml->startElement('readMore');
 
-        if (!$this->getResultId()) {
+        if ($this->getResultId()) {
+            $xml->writeElement('resultId', $this->getResultId(), true);
+        }
+		else if ($this->getReportId()) {
+            $xml->writeElement('reportId', $this->getReportId(), true);
+        }
+        else {
             throw new \InvalidArgumentException(
-                'Result ID is required for read more'
+                'Result ID or report ID is required for read more'
             );
         }
-        $xml->writeElement('resultId', $this->getResultId(), true);
         
         $xml->endElement(); //readMore
         

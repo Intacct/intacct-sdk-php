@@ -54,7 +54,7 @@ EOF;
     public function testNoResultId(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Result ID is required for read more");
+        $this->expectExceptionMessage("Result ID or report ID is required for read more");
 
         $xml = new XMLWriter();
         $xml->openMemory();

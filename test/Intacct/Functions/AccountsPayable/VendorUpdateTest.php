@@ -227,7 +227,7 @@ EOF;
 
     public function testRequiredName()
     {
-        $this->expectExceptionMessage("Vendor ID is required for update");
+        $this->expectExceptionMessage("Vendor ID or record number is required for update");
         $this->expectException(InvalidArgumentException::class);
 
         $xml = new XMLWriter();
